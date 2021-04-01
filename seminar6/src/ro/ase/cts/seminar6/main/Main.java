@@ -1,14 +1,11 @@
-package ro.ase.cts.seminar5.main;
+package ro.ase.cts.seminar6.main;
 
 import java.util.Scanner;
 
-import ro.ase.cts.seminar5.factory.AbstractProductFactory;
-import ro.ase.cts.seminar5.factory.OfficeProduct;
-import ro.ase.cts.seminar5.factory.Product;
-import ro.ase.cts.seminar5.factory.ProductFactory;
-import ro.ase.cts.seminar5.factory.TechProduct;
-import ro.ase.cts.seminar5.factory.TechProductFactory;
-import ro.ase.cts.seminar5.singleton.Cart;
+import ro.ase.cts.seminar6.builder.AbstractProductFactory;
+import ro.ase.cts.seminar6.builder.Product;
+import ro.ase.cts.seminar6.builder.TechProductFactory;
+import ro.ase.cts.seminar6.singleton.Cart;
 
 public class Main {
 
@@ -27,11 +24,6 @@ public class Main {
 			}
 		}
 		myProduct = productFactory.makeProduct();
-		
-//		}else {
-//			System.out.println("Optiune invalida.");
-//			System.out.println("Catalog produse:\ntech - Produse tech \n office - Produse office");
-//		}
 		
 		if(myProduct != null) {
 			myShoppingCart.products.add(myProduct);
