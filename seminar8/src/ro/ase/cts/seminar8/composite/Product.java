@@ -33,6 +33,6 @@ public class Product extends CatalogComponent{
 
 	@Override
 	public String toString() {
-		return this.name + " with price tag: " + this.price; 
+		return this.name + " with price tag: " + this.price + "\n"; 
 	}
 }
