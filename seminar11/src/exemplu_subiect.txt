@@ -1,0 +1,17 @@
+Firma ACME Inc dezvolta o soluție software pentru o banca având in vedere
+următoarele specificații. Toate instanțele aplicației folosesc un unic obiect care are
+rolul de a gestiona datele băncii (denumire, adresa, contor număr curent cont) dar si
+de a genera unul din cele 2 tipuri diferite de conturi pe care banca le administrează
+(Cont de Credit si Cont de Debit). Generarea conturilor se face in funcție de tipul
+contului, transmis printr-un parametru de tip String. Cele doua conturi ale băncii
+implementează interfața ContBancar ce definește 2 metode obligatorii:
+transfer(ContBancar destinație, double suma) si depune(double suma).
+
+In momentul de fata, banca se afla in discuții privind o eventuala fuziune cu o alta
+banca. Un criteriu al fuziunii este interconectarea celor 2 sisteme informatice astfel
+încât operațiunile bancare (transfer si depunere) sa se poată desfășura prin aplicațiile
+celor 2 bănci. Firma ACME Inc trebuie sa ofere o soluție de proba, având in vedere ca
+in banca partenera conturile implementează interfața BankAccount ce definește
+metoda accountTransfer(BankAccount account, double amount). Să se identifice cele
+3 pattern-uri care corespund problemelor prezentate și care oferă soluțiile optime. Pe
+baza lor să se implementeze soluția și să se testeze execuția acesteia.
