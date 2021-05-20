@@ -8,6 +8,8 @@ import ro.ase.cts.seminar12.observer.CreditAccount;
 import ro.ase.cts.seminar12.observer.InsufficientFundsException;
 import ro.ase.cts.seminar12.observer.NotificationInterface;
 import ro.ase.cts.seminar12.observer.SmsNotification;
+import ro.ase.cts.seminar12.template.DecimalFormatter;
+import ro.ase.cts.seminar12.template.HexFormatter;
 
 public class Main {
 
@@ -38,7 +40,12 @@ public class Main {
 		System.out.println("Character hitpoints: " + myCharacter.getHitpoints());
 		myCharacter.setMemento(saveList.get(0));
 		System.out.println("Character hitpoints: " + myCharacter.getHitpoints());
-
+		
+		System.out.println("---------------------------------------------------------");
+		DecimalFormatter decimalFormatter = new DecimalFormatter();
+		decimalFormatter.displayOutput(10);
+		HexFormatter hexFormatter = new HexFormatter();
+		hexFormatter.displayOutput(10);
 	}
 
 }
