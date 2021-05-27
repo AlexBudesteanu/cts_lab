@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import ro.ase.cts.seminar13.Student;
 import ro.ase.cts.seminar13.exceptions.StudentExceptionWrongValue;
@@ -15,13 +16,17 @@ class StudentTestCase {
 
 	/* test fixtures */
 	Student student;
-	String defaultName = "Anonim";
-	int defaultVarsta = 18;
-	int defaultNote[] = {}; 
+	static String DEFAULT_NAME = "Anonim";
+	static int DEFAULT_VARSTA = 18;
+	static int DEFAULT_NOTE[];
+	static int NR_NOTE_DEFAULT = 3;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		System.out.println("setUpBeforeClass was called");
+		DEFAULT_NOTE = new int[NR_NOTE_DEFAULT];
+		DEFAULT_NOTE[0] = 9;
+		DEFAULT_NOTE[1] = 9;
+		DEFAULT_NOTE[2] = 10;
 	}
 
 	@AfterAll
@@ -31,7 +36,7 @@ class StudentTestCase {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		student = new Student(defaultName, defaultVarsta, defaultNote);
+		student = new Student(DEFAULT_NAME, DEFAULT_VARSTA, DEFAULT_NOTE);
 	}
 
 	@AfterEach
@@ -65,9 +70,58 @@ class StudentTestCase {
 		
 	}
 	
-	@Test(expected = StudentExceptionWrongValue.class)
+	
+	/* error condition 
+	 * existance
+	 */
+	@Test
 	void testStudentSetVarstaErrorCondition() {
-		student.setVarsta(-1);
+		assertThrows(StudentExceptionWrongValue.class, new Executable() {
+			
+			@Override
+			public void execute() throws Throwable {
+				student.setVarsta(-1);
+			}
+		});
+
+	}
+	
+	@Test
+	void testStudentGetVarstaRight() {
+		int expectedValue = DEFAULT_VARSTA;
+		int actualValue = student.getVarsta();
+		assertEquals(expectedValue, actualValue);
+	}
+	
+	@Test
+	void testCalculMedieErrorCondition() {
+		try {
+			student.setNote(null);
+		} catch (Exception e) {
+			
+		}
+		assertThrows(StudentExceptionWrongValue.class, () -> {
+			student.calculMedie();
+		});
+	}
+	
+	@Test
+	void testCalculMedieRightDouaZecimale() throws StudentExceptionWrongValue {
+		float expectedValue = 9.33f;
+		float actualValue = student.calculMedie();
+		assertEquals(expectedValue, actualValue);
 	}
 
+	// boundary check
+	@Test
+	void testSetNoteBoundaryCondition() {
+		int invalidDatasetNote[] = new int[3];
+		for (int i = 0;i<2;i++) {
+			invalidDatasetNote[i] = 8;
+		}
+		invalidDatasetNote[2] = 20;
+		assertThrows(StudentExceptionWrongValue.class, () -> {
+			student.setNote(invalidDatasetNote);
+		});
+	}
 }
